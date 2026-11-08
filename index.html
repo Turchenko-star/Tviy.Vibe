@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tviy Vibe | Персоналізовані прикраси</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Tviy Vibe</div>
+        <nav>
+            <ul>
+                <li><a href="#quiz">Твій вайб</a></li>
+                <li><a href="#collections">Каталог</a></li>
+                <li><a href="#contact">Замовити</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Підкресли свій унікальний стиль</h1>
+            <p>Персоналізовані прикраси ручної роботи з японського бісеру та натурального каміння</p>
+            <a href="#collections" class="btn">Переглянути каталог</a>
+        </div>
+        <div class="hero-image">
+            <img src="Браслет _Ніжний дотик___Тонка, мінімалістична….jpeg" alt="Перлинний браслет">
+        </div>
+    </section>
+
+    <section id="quiz">
+        <!-- Квіз залишається без змін -->
+        <h2>Інтерактив: Обери свій вайб</h2>
+        <p class="quiz-subtitle">Дай відповідь на два питання, і ми підберемо ідеальну прикрасу саме для тебе!</p>
+        <div id="quiz-container" class="quiz-card">
+            <div id="question-1" class="quiz-step active">
+                <h3>Куди ти найчастіше одягаєш прикраси?</h3>
+                <div class="options">
+                    <button class="quiz-btn" onclick="nextStep(1, 'everyday')">На щодень (навчання, офіс, прогулянки)</button>
+                    <button class="quiz-btn" onclick="nextStep(1, 'party')">На вечірки та особливі події</button>
+                </div>
+            </div>
+            <div id="question-2" class="quiz-step">
+                <h3>Яким відтінкам ти віддаєш перевагу?</h3>
+                <div class="options">
+                    <button class="quiz-btn" onclick="showResult('light')">Світлі, пастельні та перлинні</button>
+                    <button class="quiz-btn" onclick="showResult('dark')">Насичені, темні або яскраві</button>
+                </div>
+            </div>
+            <div id="quiz-result" class="quiz-step">
+                <h3>Твій ідеальний метч знайдено!</h3>
+                <p id="result-text"></p>
+                <a href="#collections" class="btn">Перейти до каталогу</a>
+                <button class="btn outline" onclick="resetQuiz()" style="margin-top: 10px;">Пройти ще раз</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="collections">
+        <h2>Наш каталог</h2>
+        <p style="text-align:center; margin-bottom:40px; color:var(--primary-green);">Натисни на виріб, щоб дізнатися деталі, обрати розмір або замовити свій колір!</p>
+        
+        <!-- Каталог генерується через JavaScript -->
+        <h3 class="category-title">Каблучки</h3>
+        <div class="collection-grid" id="grid-rings"></div>
+
+        <h3 class="category-title">Браслети</h3>
+        <div class="collection-grid" id="grid-bracelets"></div>
+
+        <h3 class="category-title">Намиста та чокери</h3>
+        <div class="collection-grid" id="grid-necklaces"></div>
+        
+        <h3 class="category-title">Сережки</h3>
+        <div class="collection-grid" id="grid-earrings"></div>
+    </section>
+
+    <section id="contact">
+        <h2>Створимо красу разом</h2>
+        <p>Готова замовити прикрасу своєї мрії або маєш власний ескіз? Напиши нам в Instagram для узгодження деталей.</p>
+        <a href="https://instagram.com" class="btn" target="_blank">Написати в Instagram</a>
+    </section>
+
+    <footer>
+        <p>&copy; Турченко Валентина 2026, v.turchenko_femp_17_24_b_d@knute.edu.ua</p>
+    </footer>
+
+    <!-- Модальне вікно товару -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image-wrapper">
+                    <img id="modal-img" src="" alt="">
+                </div>
+                <div class="modal-details">
+                    <p class="modal-meta"><span id="modal-category"></span> | <span id="modal-collection"></span></p>
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-desc"></p>
+                    
+                    <div class="modal-info-block">
+                        <strong>Матеріал:</strong> <span id="modal-material"></span>
+                    </div>
+
+                    <div class="modal-options">
+                        <label for="size-select"><strong>Обери розмір:</strong></label>
+                        <select id="size-select" class="custom-select">
+                            <option value="S">S (14-15 см)</option>
+                            <option value="M" selected>M (16-17 см)</option>
+                            <option value="L">L (18-19 см)</option>
+                            <option value="custom">Індивідуальний розмір (вказати в Direct)</option>
+                        </select>
+                    </div>
+
+                    <div class="custom-color-box">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="custom-color-checkbox" onchange="toggleCustomColor()">
+                            <span class="checkmark"></span>
+                            Хочу свій колір / камінь (під замовлення) <br> <span style="font-size:0.85em; color:var(--dark-pink);">+15% до вартості</span>
+                        </label>
+                        <input type="text" id="custom-color-input" placeholder="Наприклад: хочу рожевий кварц замість агату..." style="display:none;">
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="modal-price-box">
+                            <span id="modal-price"></span>
+                        </div>
+                        <a href="https://instagram.com" class="btn" target="_blank">Замовити</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
